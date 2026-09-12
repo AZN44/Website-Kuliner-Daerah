@@ -684,7 +684,7 @@ body {
 }
 
 .kota_pj {
-    transform: translatey(-50px);
+    transform: translateY(-50px);
     font-size: 30px;
 }
 .nmakanan_h2 {
@@ -727,7 +727,7 @@ body {
     justify-content: center;
     align-content: center;
     align-items: center;
-    padding 20px;
+    padding: 20px;
     margin: 10px;
 }
 
