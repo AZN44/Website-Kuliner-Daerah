@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Styles.css" />
+    <link rel="icon" href="logo.png" />
+    <title>website kuliner daerah</title>
+</head>
+<body>
+    <div class="loading" id="loading">
+
+    </div>
+
+    <div class="nav">
+        <h1 class="nav_h1">WEB KULINER DAERAH</h1>
+        <ul>
+            <li><a href="#" class="Beranda_a">Beranda</a></li>
+            <li><a href="#" class="Search_a">Search</a></li>
+            <li>
+                <a href="#" class="Menu_a">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div class="menu_nav" id="menu_nav">
+        <ul class="menu_list">
+            <li><a href="#" class="home_a">Home</a></li>
+            <li><a href="#" class="disukai">Disukai</a></li>
+            <li><a href="#" class="about_a">About me</a></li>
+        </ul>
+    </div>
+
+
+    <div class="home" id="home">
+        <div class="Beranda" id="Beranda">
+            <p class="ppp">Indonesia merupakan negara yang memiliki beragam budaya dan kekayaan kuliner dari berbagai daerah.</p>
+            <p class="ppp">Setiap daerah memiliki makanan khas dengan cita rasa, bahan, dan cara pengolahan yang berbeda-beda.</p>
+            <p class="ppp">Kuliner daerah tidak hanya berfungsi sebagai makanan, tetapi juga menjadi bagian dari identitas dan warisan budaya yang perlu dikaneal serta dilestarikan.</p>
+
+            <h3 class="h3_nama"></h3>
+            <img class="gmbrmakanan" src="" alt="Gambar Makanan" />
+            <h2>Deskripsi :</h2>
+            <p class="p_deskrip"></p>
+            <p class="daerahh"></p>
+            <p class="kalori"></p>
+        </div>
+
+
+
+
+
+        <div class="search_nav" id="search_nav">
+            <div id="Search_div">
+                <input id="search" type="text" placeholder="Cari kuliner daerah..." />
+                <button id="search_button">Cari</button>
+            </div>
+
+            <div class="list_type">
+                <div class="div-propinsi">
+                    <label>Provinsi :</label>
+                    <select class="pilihan">
+                        <option class="provinsi-option" value="">All</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+
+            <div id="list_makanan" class="lm">
+
+            </div>
+
+            <div class="none_item">
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="penjelasan">
+        <button class="btnpj">⬅</button>
+        <img class="img_pj" src="data:image/jpeg;base64,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" />
+        <h2 class="nmakanan_h2">SATE</h2>
+        <p class="kota_pj">Kota</p>
+        <p class="kaloris">Kalori</p>
+        <p class="p_penjelasan">Daging sapi berbumbu rempah yang dimasak perlahan hingga kering dan kaya rasa.</p>
+        <button class="btnfav"><span class="spanlove">&hearts;</span></button>
+    </div>
+
+    <div class="favorit-div">
+        <h1>Makanan Favorit</h1>
+        <div class="list-fav">
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="aboutme">
+        <div class="div_about">
+            <h2 class="abouth2">Tentang Kami</h2>
+            <p class="aboutp">Website ini dibuat sebagai proyek untuk mengenalkan berbagai kuliner khas dari daerah-daerah di Indonesia.</p>
+            <p class="aboutp">Melalui website ini, pengguna</p>
+        </div>
+
+        <div class="div_about_2">
+            <p class="aboutp s1">T</p>
+            <p class="aboutp s2">E</p>
+            <p class="aboutp s3">R</p>
+            <p class="aboutp s4">I</p>
+            <p class="aboutp s1">M</p>
+            <p class="aboutp s2">A</p>
+            <p class="aboutp s3">K</p>
+            <p class="aboutp s4">A</p>
+            <p class="aboutp s1">S</p>
+            <p class="aboutp s2">I</p>
+            <p class="aboutp s3">H</p>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script src="script.js"></script>
+
+
+
+</body>
+</html>
