@@ -1,0 +1,9 @@
+[[redirects]]
+  from = "/script.js"
+  to = "/Script.js"
+  status = 200
+
+[[redirects]]
+  from = "/styles.css"
+  to = "/Styles.css"
+  status = 200

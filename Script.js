@@ -66,8 +66,22 @@ function sleep(ms) {
 let favlists = JSON.parse(localStorage.getItem("favlist")) || [];
 let makananSekarang = null;
 
+const API_URL = "/api/kuliner";
 
-const api_key = process.env.SUPABASE_API_KEY;
+async function fetchKuliner(queryString = "") {
+    try {
+        const respon = await fetch(`${API_URL}${queryString}`);
+        if (!respon.ok) {
+            console.error(`HTTP error! status: ${respon.status}`);
+            return [];
+        }
+        return await respon.json();
+    } catch (error) {
+        console.error("Gagal mengambil data kuliner:", error);
+        return [];
+    }
+}
+
 var A = 1
 
 penjelasan.forEach((p) => {
@@ -189,38 +203,15 @@ menu_a.addEventListener("click", () => {
         menu_nav.forEach(menu => {
             menu.style = "display: none;"
         });
-        menu_a.forEach(menu => {
-            menu.classList.remove("putar")
-        });
-
+        menu_a.classList.remove("putar");
         isclicked = false;
     } else {
         menu_nav.forEach(menu => {
             menu.style = "display: flex;"
         });
-        menu_a.forEach(menu => {
-            menu.classList.add("putar")
-        });
-
+        menu_a.classList.add("putar");
         isclicked = true;
     }
-
-});
-
-menu_a.addEventListener("click", () => {
-    if (isclicked) {
-        menu_nav.forEach(menu => {
-            menu.style = "display: none;"
-        });
-        isclicked = false;
-    } else {
-        menu_nav.forEach(menu => {
-            menu.style = "display: flex;"
-        });
-
-        isclicked = true;
-    }
-
 });
 
 
@@ -358,22 +349,15 @@ async function searchMakanan() {
     let clickk = 0;
     list_makanan.innerHTML = "";
 
-    let url;
+    let queryString;
     if (search.value.trim() == "") {
-        url = "https://pnplibrcrxgpguxpufmz.supabase.co/rest/v1/kuliner?select=*"
+        queryString = "?select=*";
     } else {
-        url = "https://pnplibrcrxgpguxpufmz.supabase.co/rest/v1/kuliner?select=*&nama=ilike.*"
+        queryString = "?select=*&nama=ilike.*"
             + encodeURIComponent(search.value.trim()) + "*&order=nama.asc";
     }
 
-    const respon = await fetch(url, {
-        headers: {
-            "apikey": api_key
-        }
-    });
-
-
-    const data = await respon.json();
+    const data = await fetchKuliner(queryString);
 
     console.log(data);
 
@@ -398,7 +382,7 @@ async function searchMakanan() {
 
     });
 
-    if (data.length == "") {
+    if (data.length == 0) {
 
         lbl.className = "tidak_ditemukan";
         lbl.textContent = "Tidak Ditemukan " + "'" + search.value.trim() + "'";
@@ -413,18 +397,13 @@ async function searchMakanan() {
 }
 
 async function filter(pilihann) {
-    const url = "https://pnplibrcrxgpguxpufmz.supabase.co/rest/v1/kuliner?select=*&provinsi=ilike.*" + encodeURIComponent(pilihann);
+    const queryString = (pilihann && pilihann.trim() !== "")
+        ? "?select=*&provinsi=ilike.*" + encodeURIComponent(pilihann)
+        : "?select=*";
 
     list_makanan.innerHTML = "";
 
-    const respon = await fetch(url, {
-        headers: {
-            "apikey": api_key
-        }
-    });
-    console.log(url);
-
-    const data = await respon.json();
+    const data = await fetchKuliner(queryString);
 
     console.log(data);
 
@@ -453,16 +432,7 @@ async function filter(pilihann) {
 
 async function provinsidrpdwn() {
     const provinsi_set = new Set()
-    const url = "https://pnplibrcrxgpguxpufmz.supabase.co/rest/v1/kuliner?select=provinsi"
-    list_makanan.innerHTML = "";
-    const respon = await fetch(url, {
-        headers: {
-            "apikey": api_key
-        }
-    });
-    console.log(url);
-
-    const data = await respon.json();
+    const data = await fetchKuliner("?select=provinsi");
 
     console.log(data);
 
@@ -510,15 +480,7 @@ async function randomimage() {
     const data3 = await ambilMakanan(random3);
 
     async function ambilMakanan(id) {
-        const url = `https://pnplibrcrxgpguxpufmz.supabase.co/rest/v1/kuliner?select=*&id=eq.${id}`;
-
-        const respon = await fetch(url, {
-            headers: {
-                "apikey": api_key
-            }
-        });
-
-        return await respon.json();
+        return await fetchKuliner(`?select=*&id=eq.${id}`);
     }
 
     data.forEach(d => {
@@ -544,16 +506,9 @@ async function randomimage() {
 }
 
     async function ambildatabtn(id) {
-        let url = `https://pnplibrcrxgpguxpufmz.supabase.co/rest/v1/kuliner?select=*&id=eq.${id}`;
-        const respon = await fetch(url, {
-            headers: {
-                "apikey": api_key
-            }
-        });
-
         makananSekarang = id;
 
-        const data = await respon.json();
+        const data = await fetchKuliner(`?select=*&id=eq.${id}`);
 
         console.log(data);
 
@@ -594,15 +549,7 @@ async function simpanfav() {
 
     const ids = favlists.join(",");
 
-    let url = `https://pnplibrcrxgpguxpufmz.supabase.co/rest/v1/kuliner?select=*&id=in.(${ids})`;
-    const respon = await fetch(url, {
-        headers: {
-            "apikey": api_key
-        }
-    });
-
-
-    const data = await respon.json();
+    const data = await fetchKuliner(`?select=*&id=in.(${ids})`);
 
     console.log(data, "fav");
 
