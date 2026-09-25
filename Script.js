@@ -99,16 +99,21 @@ penjelasan.forEach((penjelasan) => {
         penjelasan.classList.add('animback1');
         penjelasan.style = "animation: color 5s ease infinite, besarkecil1 2s ease;"
         await sleep(2000)
-        list_makanan.classList.remove("aback")
-        list_makanan.style = "display: ;"
+        if (nav_type == 3) {
+            list_makanan.classList.remove("aback");
+            list_makanan.style = "display: ;";
+        } else if (nav_type == 1) {
+            Beranda.forEach(Beranda => {
+                Beranda.style = "display: flex;"
+            });
+        }
+        
         fav.forEach(fav => {
             favlist.style = "display: grid;"
             h1fav.style = "display: flex;"
         });
 
-        Beranda.forEach(Beranda => {
-            Beranda.style = "display: flex;"
-        })
+
 
         penjelasan.style = "display: none;"
 
