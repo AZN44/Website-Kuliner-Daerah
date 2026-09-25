@@ -391,12 +391,14 @@ async function searchMakanan() {
 
         lbl.className = "tidak_ditemukan";
         lbl.textContent = "Tidak Ditemukan " + "'" + search.value.trim() + "'";
+        lbl.style = "display: flex;"
 
         divlabel.appendChild(lbl);
         console.log("tidak ada " + search.value);
 
 
     } else {
+        lbl.style = "display: none;"
         divlabel.innerHTML = "";
     }
 }
