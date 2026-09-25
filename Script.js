@@ -388,7 +388,7 @@ async function searchMakanan() {
     });
 
     if (data.length == 0) {
-
+        divlabel.style = "display: flex;"
         lbl.className = "tidak_ditemukan";
         lbl.textContent = "Tidak Ditemukan " + "'" + search.value.trim() + "'";
         lbl.style = "display: flex;"
@@ -415,7 +415,7 @@ async function filter(pilihann) {
     console.log(data);
 
     data.forEach(makanan => {
-
+        divlabel.style = "display: none;"
         const div = document.createElement("div");
 
         div.classList.add("makanan");
